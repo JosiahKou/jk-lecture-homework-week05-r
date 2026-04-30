@@ -28,6 +28,7 @@ int show_bmp(char* p, int start_row, int start_col) {  // SAME as before
     p -= rsize;  // to preceding row
   }
   uprintf(up, "\nBMP image height=%d width=%d\n", h, w);
+  return 0;
 }
 
 int main() {
@@ -39,7 +40,17 @@ int main() {
   up = &uart[0];
 
   char* p = &_binary____image0_bmp_start;
-  show_bmp(p, 0, 0);  // display a logo
+  show_bmp(p, 0, 0);  // display first logo
+  
+  char* p1 = &_binary____image1_bmp_start;
+  show_bmp(p1, 0, 195);  // display second logo to the right
+  
+  // Test the fixed kprintf functions
+  color = GREEN;
+  kprintf("Testing fixed kprintf functions:\n");
+  kprintf("Decimal: %d\n", 1000000000);
+  kprintf("Hexadecimal: 0x%x\n", 0xABCD);
+  kprintf("\n");
 
   while (1) {
     color = GREEN;
@@ -50,4 +61,5 @@ int main() {
     color = RED;
     kprintf("line=%s\n", line);
   }
+  return 0;
 }
